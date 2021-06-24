@@ -39,11 +39,11 @@ data class DepartureTime(val planned: String?, val realTime: String?)
 
 class DepartureListFragment : Fragment() {
     val andreasToHomeUrl =
-        """https://webcloud.sl.se/api/travels?mode=travelPlanner&origId=1365&destId=9508&searchForArrival=false&transportTypes=111&desiredResults=3&origName=S%C3%B6dra+station+%28p%C3%A5+Rosenlundsg%29+%28Stockholm%29&destName=Ulriksdal+%28Solna%29&useCache=false"""
+        """https://webcloud.sl.se/api/travels?mode=travelPlanner&origId=1365&destId=9508&searchForArrival=false&transportTypes=43&desiredResults=3&origName=S%C3%B6dra+station+%28p%C3%A5+Rosenlundsg%29+%28Stockholm%29&destName=Ulriksdal+%28Solna%29&useCache=false"""
     val workToAndreasUrl =
-        """https://webcloud.sl.se/api/travels?mode=travelPlanner&origId=3406&destId=1365&searchForArrival=false&transportTypes=111&desiredResults=3&origName=Karolinska+institutet+Biomedicum+%28Solna%29&destName=S%C3%B6dra+station+%28p%C3%A5+Rosenlundsg%29+%28Stockholm%29&useCache=false"""
+        """https://webcloud.sl.se/api/travels?mode=travelPlanner&origId=3406&destId=1365&searchForArrival=false&transportTypes=43&desiredResults=3&origName=Karolinska+institutet+Biomedicum+%28Solna%29&destName=S%C3%B6dra+station+%28p%C3%A5+Rosenlundsg%29+%28Stockholm%29&useCache=false"""
     val homeToAndreas =
-        """https://webcloud.sl.se/api/travels?mode=travelPlanner&origId=3398&destId=1365&searchForArrival=false&transportTypes=111&desiredResults=3&origName=Ulriksdals+station+%28Solna%29&destName=S%C3%B6dra+station+%28p%C3%A5+Rosenlundsg%29+%28Stockholm%29&useCache=false"""
+        """https://webcloud.sl.se/api/travels?mode=travelPlanner&origId=3398&destId=1365&searchForArrival=false&transportTypes=43&desiredResults=3&origName=Ulriksdals+station+%28Solna%29&destName=S%C3%B6dra+station+%28p%C3%A5+Rosenlundsg%29+%28Stockholm%29&useCache=false"""
     var searchString = andreasToHomeUrl
     private var _binding: FragmentFirstBinding? = null
     val adapter = GroupieAdapter()

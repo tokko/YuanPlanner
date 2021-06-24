@@ -53,11 +53,14 @@
             android:id="@+id/departureRecycler"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
+
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <Button
         android:id="@+id/loadMoreButton"
+        android:padding="8dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Load more" />
+
 </LinearLayout>
