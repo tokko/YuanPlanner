@@ -25,7 +25,15 @@ import java.net.URLEncoder
  */
 
 data class SLResponse(val travels: List<Travel?>?, val searchLaterRef: String?)
-data class Travel(val origin: Station?, val destination: Station?)
+data class Travel(val origin: Station?, val destination: Station?, val legs: List<Leg>)
+data class Leg(
+    val transport: Transport,
+    val origin: Station?,
+    val destination: Station?,
+    val departureTime: DepartureTime?
+)
+
+data class Transport(val transportType: String, val direction: String, val line: String)
 data class Station(val departureTime: DepartureTime?, val name: String?)
 data class DepartureTime(val planned: String?, val realTime: String?)
 
@@ -102,6 +110,7 @@ class DepartureListFragment : Fragment() {
                     adapter.addAll(data.travels?.filterNotNull()?.map { DepartureItem(it) }
                         ?: emptyList())
                     adapter.notifyDataSetChanged()
+                    _binding?.departureRecycler?.scrollToPosition(adapter.itemCount - 1)
                     _binding?.swiperefresh?.isRefreshing = false
 
                     _binding?.loadMoreButton?.setOnClickListener {
@@ -122,15 +131,17 @@ class DepartureListFragment : Fragment() {
 
 class DepartureItem(val travel: Travel) : BindableItem<DepartureitemBinding>() {
     override fun bind(viewBinding: DepartureitemBinding, position: Int) {
-        if (travel.origin?.departureTime?.realTime?.isNullOrBlank() == true) return
+        val start = travel.legs.first()
+        if (start.departureTime?.realTime?.isNullOrBlank() == true) return
         val dt = DateTime.parse(
             travel.origin?.departureTime?.realTime ?: travel.origin?.departureTime?.planned
             ?: "Unknown time :("
         )
         viewBinding.departureTime.text =
             "${dt.hourOfDay.toStringPadZero()}:${dt.minuteOfHour.toStringPadZero()}"
-        viewBinding.stationName.text = travel.origin?.name ?: "Unknown station"
-        viewBinding.destinationStationName.text = travel.destination?.name ?: "Unknown station"
+        viewBinding.stationName.text = start.origin?.name ?: "Unknown station"
+        viewBinding.destinationStationName.text = start.destination?.name ?: "Unknown station"
+        viewBinding.transportType.text = "${start.transport.transportType} ${start.transport.line}"
     }
 
     override fun getLayout() = R.layout.departureitem
