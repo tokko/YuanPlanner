@@ -50,6 +50,7 @@
         android:id="@+id/departureTime"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textStyle="bold"
         android:paddingStart="12dp"
         android:textSize="18sp" />
 
@@ -57,7 +58,7 @@
         android:id="@+id/transportType"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingStart="8sp"
+        android:paddingStart="12sp"
         android:textSize="16sp" />
 
     <View

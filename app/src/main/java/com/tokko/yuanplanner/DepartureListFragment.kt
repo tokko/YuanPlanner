@@ -132,7 +132,7 @@ class DepartureListFragment : Fragment() {
 class DepartureItem(val travel: Travel) : BindableItem<DepartureitemBinding>() {
     override fun bind(viewBinding: DepartureitemBinding, position: Int) {
         val start = travel.legs.first()
-        if (start.departureTime?.realTime?.isNullOrBlank() == true) return
+        if (start.departureTime?.realTime?.isBlank() == true) return
         val dt = DateTime.parse(
             travel.origin?.departureTime?.realTime ?: travel.origin?.departureTime?.planned
             ?: "Unknown time :("
@@ -140,8 +140,8 @@ class DepartureItem(val travel: Travel) : BindableItem<DepartureitemBinding>() {
         viewBinding.departureTime.text =
             "${dt.hourOfDay.toStringPadZero()}:${dt.minuteOfHour.toStringPadZero()}"
         viewBinding.stationName.text = start.origin?.name ?: "Unknown station"
-        viewBinding.destinationStationName.text = start.destination?.name ?: "Unknown station"
-        viewBinding.transportType.text = "${start.transport.transportType} ${start.transport.line}"
+        viewBinding.destinationStationName.text = travel.legs.last().destination?.name ?: "Unknown station"
+        viewBinding.transportType.text = travel.legs.map { "${it.transport.transportType} ${it.transport.line}"  }.joinToString(" -> ")
     }
 
     override fun getLayout() = R.layout.departureitem
