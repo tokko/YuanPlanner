@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.gms.location.Geofence
+import com.google.android.gms.location.LocationServices
 import com.google.gson.Gson
 import com.squareup.okhttp.Callback
 import com.squareup.okhttp.OkHttpClient
@@ -51,6 +53,30 @@ class DepartureListFragment : Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        context?.let {
+            val geofencingClient = LocationServices.getGeofencingClient(it)
+            val geoWorkToAndreas = createGeofence("workToAndreas", 0.0, 0.0)
+
+        }
+
+    }
+
+    private fun createGeofence(key: String, x: Double, y: Double) {
+        Geofence.Builder()
+            .setRequestId(key)
+            .setCircularRegion(
+                x,
+                y,
+                100.0F
+            )
+            .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_DWELL)
+            .setLoiteringDelay(10 * 60 * 1000)
+            .build())
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
