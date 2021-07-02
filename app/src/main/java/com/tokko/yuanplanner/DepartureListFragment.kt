@@ -33,6 +33,7 @@ data class Leg(
     val departureTime: DepartureTime?
 )
 
+
 data class Transport(val transportType: String, val direction: String, val line: String)
 data class Station(val departureTime: DepartureTime?, val name: String?)
 data class DepartureTime(val planned: String?, val realTime: String?)
